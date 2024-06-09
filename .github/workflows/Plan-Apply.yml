@@ -86,7 +86,7 @@ jobs:
         path: terraform
         name: plan_dev
     
-    - name: Terraform Apply
-      id: apply
+    - name: Terraform destroy
+      id: destroy
       working-directory: terraform
-      run: terraform destroy -auto-approve -lock=false plan.dev.out
+      run: terraform destroy -auto-approve 
