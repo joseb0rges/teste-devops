@@ -1,4 +1,4 @@
-name: Test Timeout
+name: Test Timeout Dependency
 
 on:
   workflow_dispatch: # Permite disparar o workflow manualmente
@@ -10,11 +10,12 @@ jobs:
       - name: Start a long-running process without timeout
         run: |
           echo "Starting a long-running process without timeout..."
-          sleep 150 # Aguarda 2 minutos e 30 segundos
+          sleep 60 # Aguarda 1 minuto
           echo "Process completed successfully without timeout"
 
   timeout-job:
     runs-on: ubuntu-latest
+    needs: no-timeout-job # Este job depende do primeiro
     timeout-minutes: 2 # Define o timeout para 2 minutos
     steps:
       - name: Start a long-running process with timeout
