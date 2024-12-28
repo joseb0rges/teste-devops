@@ -4,12 +4,21 @@ on:
   workflow_dispatch: # Permite disparar o workflow manualmente
 
 jobs:
-  test-timeout:
+  no-timeout-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start a long-running process without timeout
+        run: |
+          echo "Starting a long-running process without timeout..."
+          sleep 150 # Aguarda 2 minutos e 30 segundos
+          echo "Process completed successfully without timeout"
+
+  timeout-job:
     runs-on: ubuntu-latest
     timeout-minutes: 2 # Define o timeout para 2 minutos
     steps:
-      - name: Start a long-running process
+      - name: Start a long-running process with timeout
         run: |
-          echo "Starting a process that will take longer than 2 minutes..."
+          echo "Starting a long-running process with timeout..."
           sleep 150 # Aguarda 2 minutos e 30 segundos
-          echo "Process completed"
+          echo "This message won't appear because the job will timeout"
